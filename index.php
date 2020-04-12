@@ -135,8 +135,12 @@ include('includes/header.php');
               <div class="owl-slide-3 owl-carousel">
               <?php  
               include('processes/connection.php');
+                $t_count = "SELECT email from teacher_user";
+                $result_count=mysqli_query($con,$t_count);
+                //calculation of the total teachers in the database
+                $rowcount = mysqli_num_rows($result_count);
 
-                $query = "SELECT * FROM courses where status = 'live'group by teacher_name limit 5";  
+                $query = "SELECT * FROM courses where status = 'live'group by teacher_name limit $rowcount";  
                 $result = mysqli_query($con, $query);  
                 $query2 = "SELECT fname , lname from teacher_user order by email" ;
                 $result2 = mysqli_query($con, $query2);
